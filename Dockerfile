@@ -12,7 +12,7 @@ CMD ["/bin/sh" ,"-c" ,"go mod download"]
 
 RUN go build -o ./chabokan
 
-#EXPOSE 1212
+EXPOSE 443
 
 #CMD tail -f /dev/null
 
