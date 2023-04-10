@@ -32,10 +32,10 @@ func main() {
 	// Anything we don't do in Go, we pass to the old platform
 	http.HandleFunc("/blog/", blog) //
 
-	fmt.Println("Listening on localhost:443")
+	fmt.Println("Listening on localhost:444")
 
 	// Start the server
-	http.ListenAndServe(":443", nil)
+	http.ListenAndServe(":444", nil)
 }
 
 func blog(w http.ResponseWriter, r *http.Request) {
