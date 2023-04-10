@@ -32,10 +32,10 @@ func main() {
 	// Anything we don't do in Go, we pass to the old platform
 	http.HandleFunc("/blog/", blog) //
 
-	fmt.Println("Listening on localhost:444")
+	fmt.Println("Listening on localhost:443")
 
 	// Start the server
-	http.ListenAndServe(":444", nil)
+	http.ListenAndServe(":443", nil)
 }
 
 func blog(w http.ResponseWriter, r *http.Request) {
@@ -49,11 +49,12 @@ func blog(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("---- User: " + slices[1] + " | Address: " + slices[2] + ":" + slices[3] + " (" + slices[4] + ") | Host1: " + r.Host + " | Host2: " + slices[5] + " | ")
 
-	u, _ := url.Parse("http://" + dip + ":444")
+	u, _ := url.Parse("http://" + dip + ":" + slices[0])
 	pro := httputil.NewSingleHostReverseProxy(u)
 
 	vars[1] = vars[1] + "444"
-	r.URL.Path = strings.Join(vars, "/")
+	r.URL.Path = "/"
+	//r.URL.Path = strings.Join(vars, "/")
 	fmt.Println("---- r.URL.Path: " + r.URL.Path)
 
 	pro.ServeHTTP(w, r)
