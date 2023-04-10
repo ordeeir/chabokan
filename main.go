@@ -49,10 +49,10 @@ func blog(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("---- User: " + slices[1] + " | Address: " + slices[2] + ":" + slices[3] + " (" + slices[4] + ") | Host1: " + r.Host + " | Host2: " + slices[5] + " | ")
 
-	u, _ := url.Parse("http://" + dip + ":444")
+	u, _ := url.Parse("http://" + dip + ":443")
 	pro := httputil.NewSingleHostReverseProxy(u)
 
-	vars[1] = vars[1] + "444"
+	//vars[1] = vars[1] + "444"
 	r.URL.Path = strings.Join(vars, "/")
 	fmt.Println("---- r.URL.Path: " + r.URL.Path)
 
