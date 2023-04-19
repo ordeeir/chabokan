@@ -33,7 +33,7 @@ func main() {
 	fmt.Println("Listening..............................................")
 
 	// Start the server
-	http.ListenAndServe(":443", nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func blog(w http.ResponseWriter, r *http.Request) {
