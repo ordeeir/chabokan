@@ -1,13 +1,11 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"os"
-	"strings"
 )
 
 const (
@@ -18,11 +16,11 @@ var dip string
 
 func main() {
 
-	dip = os.Getenv("DIP")
+	//dip = os.Getenv("DIP")
 
-	if dip == "" {
-		dip = os.Args[1]
-	}
+	//if dip == "" {
+	//dip = os.Args[1]
+	//}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		b, _ := os.ReadFile("index.html")
@@ -30,9 +28,9 @@ func main() {
 	})
 
 	// Anything we don't do in Go, we pass to the old platform
-	http.HandleFunc("/blog/", blog) //
+	http.HandleFunc("/", blog) //
 
-	fmt.Println("Listening on localhost:4430")
+	fmt.Println("Listening..............................................")
 
 	// Start the server
 	http.ListenAndServe(":4430", nil)
@@ -40,20 +38,22 @@ func main() {
 
 func blog(w http.ResponseWriter, r *http.Request) {
 
+	fmt.Println("data is transfering...")
+
 	// change the request host to match the target
-	vars := strings.Split(r.URL.Path, "/")
+	//vars := strings.Split(r.URL.Path, "/")
 
-	data, _ := base64.StdEncoding.DecodeString(vars[2])
+	//data, _ := base64.StdEncoding.DecodeString(vars[2])
 
-	slices := strings.Split(string(data)+"///", "/")
+	//slices := strings.Split(string(data)+"///", "/")
 
-	fmt.Println("---- User: " + slices[1] + " | Address: " + slices[2] + ":" + slices[3] + " (" + slices[4] + ") | Host1: " + r.Host + " | Host2: " + slices[5] + " | ")
+	//fmt.Println("---- User: " + slices[1] + " | Address: " + slices[2] + ":" + slices[3] + " (" + slices[4] + ") | Host1: " + r.Host + " | Host2: " + slices[5] + " | ")
 
-	u, _ := url.Parse("http://" + dip + ":444")
+	u, _ := url.Parse("https://srvgr3.farsino.xyz")
 	pro := httputil.NewSingleHostReverseProxy(u)
 
-	vars[1] = vars[1] + "444"
-	r.URL.Path = strings.Join(vars, "/")
+	//vars[1] = vars[1] + "444"
+	//r.URL.Path = strings.Join(vars, "/")
 	//fmt.Println("---- r.URL.Path: " + r.URL.Path)
 
 	pro.ServeHTTP(w, r)
