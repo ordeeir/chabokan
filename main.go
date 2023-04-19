@@ -28,7 +28,7 @@ func main() {
 	})
 
 	// Anything we don't do in Go, we pass to the old platform
-	http.HandleFunc("/blog", blog) //
+	http.HandleFunc("/blog/", blog) //
 
 	fmt.Println("Listening..............................................")
 
