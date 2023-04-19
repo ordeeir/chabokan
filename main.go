@@ -51,7 +51,9 @@ func blog(w http.ResponseWriter, r *http.Request) {
 
 	u, _ := url.Parse("https://srvgr3.farsino.xyz")
 	pro := httputil.NewSingleHostReverseProxy(u)
-
+	r.URL.Host = "srvgr3.farsino.xyz"
+	r.Host = r.URL.Host
+	//r.URL.
 	//vars[1] = vars[1] + "444"
 	//r.URL.Path = strings.Join(vars, "/")
 	//fmt.Println("---- r.URL.Path: " + r.URL.Path)
